@@ -24,10 +24,10 @@ import InputTodo from './components/InputTodo.vue';
 let ts = new Date().getTime();
 
 const todoList = reactive([
-  { id: ts, todo: '자전거 타기', completed: false },
-  { id: ts + 1, todo: '딸과 공원 산책', completed: true },
-  { id: ts + 2, todo: '일요일 애견 카페', completed: false },
-  { id: ts + 3, todo: 'Vue 원고 집필', completed: false },
+  { id: ts, todo: '클라이밍 하기', completed: false },
+  { id: ts + 1, todo: '밤비 산책시키기', completed: true },
+  { id: ts + 2, todo: '코딩 공부하기', completed: false },
+  { id: ts + 3, todo: '정처기 공부하기', completed: false },
 ]);
 
 const addTodo = (todo) => {

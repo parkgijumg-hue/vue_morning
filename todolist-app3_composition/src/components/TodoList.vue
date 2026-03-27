@@ -21,7 +21,7 @@
 import TodoListItem from './TodoListItem.vue';
 
 const props = defineProps({ todoList: { type: Array, required: true } });
-const emit = defineEmits(['delete-todo', 'toggle-complete']);
+const emit = defineEmits(['delete-todo', 'toggle-completed']);
 // export default {
 //   name: 'TodoList',
 //   components: { TodoListItem },

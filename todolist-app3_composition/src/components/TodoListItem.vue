@@ -2,7 +2,7 @@
   <li
     class="list-group-item"
     :class="{ 'list-group-item-success': todoItem.completed }"
-    @click="$emit('toggle-completed', todoItem.id)"
+    @click="emit('toggle-completed', todoItem.id)"
   >
     <span :class="{ 'todo-done': todoItem.completed }"
       >{{ todoItem.todo }} - {{ todoItem.completed }}
