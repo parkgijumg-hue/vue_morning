@@ -1,14 +1,24 @@
 <template>
   <div @keyup.enter="CalcAdd">
-    x: <input type="text" v-model.number="state.x" />
+    x:
+    <input
+      type="text"
+      v-model.number="state.x"
+      style="background-color: yellow"
+    />
     <!-- x: <input type="text" v-model.number="useTransitionState.x" /> -->
     <br />
-    y: <input type="text" v-model.number="state.y" />
+    y:
+    <input
+      type="text"
+      v-model.number="state.y"
+      style="background-color: yellow"
+    />
     <!-- y: <input type="text" v-model.number="useTransitionState.y" /> -->
     <br />
-    <button @click="CalcAdd">계산</button>
+    <button @click="CalcAdd" class="btn btn-primary">계산</button>
     <br />
-    {{ state.result }}
+    <div class="btn btn-success">{{ state.result }}</div>
   </div>
 </template>
 <script>
