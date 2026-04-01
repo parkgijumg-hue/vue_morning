@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traditional Event</title>
+    <script>
+      // 모든 리소스 로드가 끝난 뒤 한 번 실행될 함수를 onload에 등록
+      window.onload = function () {
+        // id="button" 요소를 찾는다. 없으면 null이므로 실무에선 존재 여부를 확인하는 게 안전하다.
+        var button = document.getElementById('button');
+        if (!button) return;
+
+        // 전통적 DOM0 방식: onclick 프로퍼티에 함수를 대입하면 클릭 시 실행된다.
+        // 실무에서는 간단한 데모나 레거시 코드에 쓰이고, 복수 핸들러가 필요하면 addEventListener를 선호.
+        button.onclick = function () {
+          alert('click'); // 버튼을 누르면 알림창 표시
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <!-- 이벤트는 JS에서 연결하고, 마크업은 깔끔하게 유지 -->
+    <button id="button">버튼</button>
+  </body>
+</html>

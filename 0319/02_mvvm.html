@@ -1,0 +1,71 @@
+<!doctype html>
+<!--
+  이 파일은 Vue 3의 MVVM(모델-뷰-뷰모델) 패턴을
+  아주 간단하게 보여주는 예제입니다.
+  아래에 한국어 주석으로 각 줄의 역할을 설명합니다.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 모바일 화면에서도 레이아웃이 깨지지 않도록 화면 비율을 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 하나의 컴포넌트는 MVVM 방식으로 작성된다는 의미의 주석 -->
+
+    <div id="app">
+      <!--
+        1) 머스태시 문법: {{message}}
+        - Vue가 message 데이터를 화면에 바인딩(연결)합니다.
+      -->
+      <h2>{{message}}</h2>
+      <!--
+        2) v-text 디렉티브
+        - message 값을 텍스트 노드로 넣습니다.
+        - {{message}}와 동일하지만, 속성 형태로 작성합니다.
+      -->
+      <h2 v-text="message"></h2>
+      <!--
+        3) v-html 디렉티브
+        - message2 값을 "HTML로 해석"해서 삽입합니다.
+        - 실제 태그가 렌더링되므로 XSS(스크립트 삽입) 위험이 있어
+          신뢰할 수 있는 데이터에만 사용해야 합니다.
+      -->
+      <h2 v-html="message2"></h2>
+    </div>
+    <!-- 브라우저에 없는 js기능(라이브럴)을 쓰고 싶으면 외부에 있는 파일을 연결  -->
+    <script src="out.js"></script>
+    <!-- Vue 3 라이브러리를 CDN으로 불러옵니다. -->
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+      // Model: 화면에 보여줄 실제 데이터(상태)
+      let model = {
+        message: 'Hello  Vue3!',
+        message2:
+          // v-html로 넣을 HTML 문자열
+          '<span style="background: lime; ,color:red;">나는 훌륭한 vue 개발자!</span>',
+      };
+      // ViewModel: 모델과 뷰를 연결해 주는 Vue 앱 인스턴스
+      let vm = Vue.createApp({
+        // 컴포넌트 이름(디버깅에 유용)
+        name: 'App',
+        // data()는 컴포넌트의 반응형 상태를 반환합니다.
+        data() {
+          // 모델 객체를 반환하여 뷰와 연결
+          return model;
+        },
+        /*
+          흐름 요약:
+          - model.message / model.message2 변경
+          - Vue의 반응형 시스템이 변경을 감지
+          - 화면(h2)에 자동으로 반영
+        */
+      }).mount('#app');
+      // mount('#app') : id가 app인 DOM을 Vue가 관리하도록 연결
+
+      //js연결
+      hi();
+    </script>
+  </body>
+</html>

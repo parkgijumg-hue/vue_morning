@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event (real-world pattern)</title>
+    <script>
+      // 가장 많이 쓰이는 패턴: addEventListener로 JS와 HTML을 분리하고,
+      // DOM이 준비된 뒤에 이벤트를 안전하게 연결한다.
+      window.addEventListener('DOMContentLoaded', () => {
+        // 1) 대상 요소 찾기 (id로 조회). 없으면 null이라서 조건 체크가 필요할 수도 있음.
+        const button = document.getElementById('button');
+
+        // 2) 방어 코드: 요소가 없으면 조용히 종료 (실무에서 흔히 넣는 안전장치)
+        if (!button) return;
+
+        // 3) 클릭 이벤트 연결
+        // addEventListener 장점:
+        //   - 같은 이벤트에 여러 핸들러를 붙일 수 있음 (프로퍼티 방식은 덮어씀).
+        //   - 옵션({ once, capture, passive }) 등 확장 기능 사용 가능.
+        //   - HTML과 JS 분리 → 유지보수, 테스트, 접근성 측면에서 유리.
+        button.addEventListener('click', () => {
+          // 실제 동작: 단순 알림 예시
+          alert('click');
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- 마크업은 단순히 버튼만 정의. 이벤트 로직은 모두 JS에서 관리 -->
+    <button id="button">버튼</button>
+  </body>
+</html>

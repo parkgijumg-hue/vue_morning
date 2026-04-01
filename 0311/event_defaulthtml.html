@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        // id="button"인 링크(a)를 가져온다.
+        let button = document.getElementById('button');
+        // 클릭 시 기본 동작(링크 이동)을 막고 아무 일도 하지 않음.
+        button.onclick = function () {
+          return false; // a 태그의 기본 동작 취소
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <a href="http://hanbit.co.kr" id="button">버튼 </a>
+  </body>
+</html>

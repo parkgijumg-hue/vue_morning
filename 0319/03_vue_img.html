@@ -1,0 +1,65 @@
+<!doctype html>
+<!--
+  Vue 3 기본 바인딩 예제
+  - 텍스트 바인딩
+  - HTML 바인딩
+  - 속성 바인딩(:value, v-bind)
+  - 이미지 출력
+  각 줄에 쉬운 설명을 달아둡니다.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 모바일에서도 화면 비율이 깨지지 않도록 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 1) 머스태시 문법: message 값을 화면에 출력 -->
+      <h2>{{message}}</h2>
+      <!-- 2) v-text: message 값을 텍스트로 넣음 ({{}}와 같은 결과) -->
+      <h2 v-text="message"></h2>
+      <!-- 3) v-html: message2 값을 HTML로 해석하여 넣음 -->
+      <h2 v-html="message2"></h2>
+
+      <!-- 4) :value 는 v-bind:value의 축약 -->
+      <!-- 입력창의 value에 message를 "단방향"으로 넣음 -->
+      <input type="text" :value="message" style="background-color: yellow" />
+      <br />
+      <!-- 5) v-bind:value: 위와 동일한 의미 -->
+      <input
+        type="text"
+        v-bind:value="message"
+        style="background-color: pink"
+      />
+      <hr />
+      <!-- 6) 일반 img 태그: 현재는 고정된 주소를 사용 -->
+      <img
+        src="https://img.khan.co.kr/news/2019/11/08/l_2019110801001014500075872.jpg"
+        style="width: 100px; height: 100px"
+      />
+    </div>
+    <!-- Vue 3 라이브러리를 CDN으로 로드 -->
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+      // Model: 화면에 표시할 데이터
+      let model = {
+        message: 'Hello Vue3!',
+        // HTML로 보여줄 문자열 (v-html에서 사용)
+        message2: '<span style="background: lime; color:red;">나는 훌륭</span>',
+        // 이미지 경로 예시 (지금은 HTML에서 아직 사용하지 않음)
+        imagePath: 'p.png',
+      };
+      // ViewModel: 모델과 뷰를 연결하는 Vue 앱
+      let vm = Vue.createApp({
+        name: 'App',
+        // data()가 반환하는 객체가 화면과 반응형으로 연결됨
+        data() {
+          return model;
+        },
+      }).mount('#app');
+      // mount('#app') : id="app" 영역을 Vue가 관리하도록 연결
+    </script>
+  </body>
+</html>

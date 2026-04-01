@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        // 1) 빈 문자열에 256개의 <div> 태그를 이어 붙여서 긴 HTML 문자열을 만든다.
+        let output = '';
+        for (let i = 0; i < 256; i++) {
+          output += '<div></div>';
+        }
+        // 2) body 안에 그 문자열을 넣어 실제 div 256개를 한 번에 생성.
+        document.body.innerHTML = output;
+
+        // 3) 만들어진 모든 div를 선택해 스타일을 준다.
+        let divs = document.querySelectorAll('div');
+        for (let i = 0; i < divs.length; i++) {
+          let div = divs[i];
+          // 높이 2px짜리 가는 막대
+          div.style.height = '2px';
+          // i 값(0~255)을 R,G,B 모두에 넣어 회색 그라데이션 생성
+          div.style.background = 'rgb(' + i + ',' + i + ',' + i + ')';
+        }
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

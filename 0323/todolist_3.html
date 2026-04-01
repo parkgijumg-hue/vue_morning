@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+  todolist_3.html
+  Vue의 v-model, v-for, 이벤트 바인딩을 사용해
+  실제로 동작하는 TodoList를 만든 완성 단계입니다.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>06-11</title>
+    <!-- Bootstrap CSS 로드 -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+    <style>
+        /* 기본 페이지 여백과 폰트 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        /* 타이틀 스타일: 상단 제목에 적용 */
+        .title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20pt;
+        }
+
+        /* 완료된 항목에 줄 긋기: 완료 상태일 때 텍스트에 적용 */
+        .todo-done {
+            text-decoration: line-through;
+        }
+
+        /* 컨테이너 패딩: 전체 앱 래퍼에 적용 */
+        .container {
+            padding: 10px 10px 10px 10px;
+        }
+
+        /*
+          borderless 패널용 스타일을 의도한 것으로 보입니다.
+          (주의) 클래스 이름에 공백이 있어 적용되지 않습니다.
+        */
+        .panel -borderless {
+            border: 0;
+            box-shadow: none;
+        }
+
+        /* 마우스 커서를 포인터로: 클릭 가능한 요소에 적용 */
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- #app: Vue가 마운트되는 영역 -->
+    <!-- Bootstrap 기본 클래스: .container (레이아웃 폭/여백) -->
+    <div id="app" class="container">
+        <!-- 상단 제목 카드 -->
+        <!-- Bootstrap 기본 클래스: .card(카드 박스) / .card-body(내부 패딩) / .bg-light(연한 배경) -->
+        <div class="card card-body bg-light">
+            <!-- 사용자 정의 클래스: .title (CSS에서 직접 만든 제목 스타일) -->
+            <div class="title">:: Todolist App</div>
+        </div>
+        <!-- Bootstrap 기본 클래스: .card -->
+        <!-- 사용자 정의/미정의 클래스: .card-default, .card-borderless (현재 CSS에 정의 없음) -->
+        <div class="card card-default card-borderless">
+
+            <!-- .card-body: 카드 내부 패딩 -->
+            <div class="card-body">
+                <!-- 입력 영역 -->
+                <!-- Bootstrap 기본 클래스: .row(그리드 행) / .mb-3(아래 여백) -->
+                <div class="row mb-3">
+                    <!-- Bootstrap 기본 클래스: .col(그리드 컬럼) -->
+                    <div class="col">
+                        <!-- Bootstrap 기본 클래스: .input-group(입력창+버튼 묶음) -->
+                        <div class="input-group">
+                            <!-- v-model: 입력값과 데이터(todo)를 양방향으로 연결 -->
+                            <!-- @keyup.enter: 엔터키를 눌렀을 때만 addTodo 실행 -->
+                            <!-- Bootstrap 기본 클래스: .form-control(입력 스타일) -->
+                            <input id="msg" type="text" class="form-control" name="msg" v-model="todo"
+                                @keyup.enter="addTodo" placeholder="할일을 여기에 입력!" />
+                            <!-- 버튼 클릭 시 addTodo 실행 -->
+                            <!-- Bootstrap 기본 클래스: .btn / .btn-primary / .input-group-addon -->
+                            <span class="btn btn-primary input-group-addon" @click="addTodo">추가</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 목록 영역 -->
+                <!-- Bootstrap 기본 클래스: .row(그리드 행) -->
+                <div class="row">
+                    <!-- Bootstrap 기본 클래스: .col(그리드 컬럼) -->
+                    <div class="col">
+                        <!-- Bootstrap 기본 클래스: .list-group(리스트 그룹) -->
+                        <ul class="list-group">
+                            <!-- v-for: 배열(todolist)을 반복 렌더링 -->
+                            <!-- :key: 각 항목을 구분하는 고유값(성능/정확한 업데이트에 필요) -->
+                            <!-- .list-group-item: 리스트 아이템 기본 스타일 -->
+                            <!-- 동적 클래스: 완료 시 .list-group-item-success(초록 배경) 적용 -->
+                            <li v-for="todoitem in todolist" :key="todoitem.id" class="list-group-item"
+                                :class="{ 'list-group-item-success': todoitem.completed } "
+                                @click="toggleCompleted(todoitem.id)">
+                                <!-- 완료 시 텍스트에 줄 긋기 -->
+                                <!-- 사용자 정의 클래스: .pointer(커서 변경) -->
+                                <!-- 사용자 정의 클래스: .todo-done(완료 시 줄 긋기) -->
+                                <span class="pointer" :class="{ 'todo-done': todoitem.completed }">
+                                    {{todoitem.todo}} {{ todoitem.completed ? "(완료)" : "" }}
+                                </span>
+                                <!-- 삭제 버튼: 클릭 이벤트가 부모로 전파되지 않도록 .stop 사용 -->
+                                <!-- Bootstrap 기본 클래스: .float-end / .badge / .bg-secondary -->
+                                <!-- 사용자 정의 클래스: .pointer(커서 변경) -->
+                                <span class="float-end badge bg-secondary pointer"
+                                    @click.stop="deleteTodo(todoitem.id)">삭제</span>
+                            </li>
+                        </ul>
+                    </div> <!-- .col -->
+                </div>
+            </div>
+        </div>
+        <!-- Vue 라이브러리 로드 -->
+        <script src="https://unpkg.com/vue"></script>
+        <script type="text/javascript">
+            // 초기 타임스탬프(중복되지 않는 id 생성용)
+            // JS 기본 객체/메서드 사용: Date, getTime()
+            var ts = new Date().getTime();
+            //할일 아이디 유니크(중복X)하고 반드시 쓰기 위해 시각을 구해줌.
+            // Vue 라이브러리 제공: Vue.createApp()
+            var vm = Vue.createApp( {
+                name: "App", // 사용자 정의 앱 이름
+                data () {
+                    return {
+                        // 사용자 정의 데이터(변수)
+                        // todo: 입력창과 연결된 값(v-model)
+                        todo: "",
+                        // todolist: 화면에 보여줄 할 일 목록
+                        todolist: [
+                            { id: ts, todo: "자전거 타기", completed: false },
+                            { id: ts + 1, todo: "딸과 공원 산책", completed: true },
+                            { id: ts + 2, todo: "일요일 애견 카페", completed: false },
+                            { id: ts + 3, todo: "Vue 원고 집필", completed: false },
+                        ],
+                    };
+                },
+                methods: {
+                    // 사용자 정의 메서드(함수)
+                    // 할 일 추가: 2글자 이상일 때만 추가
+                    addTodo () {
+                        if ( this.todo.length >= 2 ) {
+                            // push(): 배열 끝에 새 항목 추가
+                            this.todolist.push( { id: new Date().getTime(), todo: this.todo, completed: false } );
+                            this.todo = "";
+                        }
+                    },
+                    // 삭제: id로 해당 항목을 찾아 제거
+                    deleteTodo ( id ) {
+                        // JS 기본 배열 메서드: findIndex()
+                        let index = this.todolist.findIndex( ( item ) => id === item.id );
+                        // splice(): 해당 위치의 항목을 제거
+                        this.todolist.splice( index, 1 );
+                    },
+                    // 완료 토글: completed 값을 반전
+                    toggleCompleted ( id ) {
+                        // JS 기본 배열 메서드: findIndex()
+                        let index = this.todolist.findIndex( ( item ) => id === item.id );
+                        // !true -> false, !false -> true (값 반전)
+                        this.todolist[ index ].completed = !this.todolist[ index ].completed;
+                    },
+                },
+            } ).mount( "#app" );
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 모든 리소스 로드 후에 실행
+      window.onload = function () {
+        // 화면에 시계를 표시할 요소를 찾음 (없으면 null → 실무에선 방어 코드 고려)
+        let clock = document.getElementById('clock');
+
+        // 1초(1000ms)마다 현재 시각을 갱신하는 타이머
+        // 실무: 실시간 표기(시계, 카운트다운)나 주기적 상태 표시를 할 때 setInterval을 사용.
+        setInterval(() => {
+          // 현재 시각 객체 생성
+          let now = new Date();
+          // 문자열로 변환해 h1 내용으로 표시
+          clock.innerHTML = now.toString();
+        }, 1000);
+      };
+    </script>
+  </head>
+  <body>
+    <!-- 시계가 표시될 자리 -->
+    <h1 id="clock"></h1>
+  </body>
+</html>

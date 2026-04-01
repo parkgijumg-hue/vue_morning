@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inline Event + Named Handler</title>
+    <script>
+      // 버튼 클릭 시 실행할 함수를 미리 정의
+      function buttonClick() {
+        alert('click');
+      }
+    </script>
+  </head>
+  <body>
+    <!-- 인라인이지만 함수 이름만 호출 → 중복 사용 시 재사용 가능 -->
+    <button onclick="buttonClick()">버튼</button>
+  </body>
+</html>

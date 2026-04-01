@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 페이지가 모두 로드된 뒤 한 번 실행
+      window.onload = function () {
+        // body 요소에 사용자 정의 속성(data-custom)을 동적으로 추가/덮어쓴다.
+        // 실무: 초기 데이터나 상태 플래그를 HTML에 심어 JS가 읽게 할 때 data-*를 흔히 사용.
+        document.body.setAttribute('data-custom', 'value');
+
+        // 방금 설정한 속성 값을 읽어온다. 없으면 null을 반환.
+        let data = document.body.getAttribute('data-custom');
+
+        // 값 확인용 알림(여기서는 "value"가 뜸)
+        alert(data);
+      };
+    </script>
+  </head>
+  <!-- data-custom을 HTML에서 미리 달아둔 상태. 위 JS가 실행되면 같은 값으로 다시 설정됨 -->
+  <body data-custom="value"></body>
+</html>

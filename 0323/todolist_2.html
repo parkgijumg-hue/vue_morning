@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+  todolist_2.html
+  정적인 HTML 구조와 Vue 로직(데이터/메서드)이 준비된 단계입니다.
+  아직 템플릿 바인딩(v-for, v-model)이 연결되지 않은 상태입니다.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>06-11</title>
+    <!-- Bootstrap CSS 로드 -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+    <style>
+        /* 기본 페이지 여백과 폰트 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        /* 타이틀 스타일 */
+        .title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20pt;
+        }
+
+        /* 완료된 항목에 줄 긋기 */
+        .todo-done {
+            text-decoration: line-through;
+        }
+
+        /* 컨테이너 패딩 */
+        .container {
+            padding: 10px 10px 10px 10px;
+        }
+
+        /*
+          borderless 패널용 스타일을 의도한 것으로 보입니다.
+          (주의) 클래스 이름에 공백이 있어 적용되지 않습니다.
+        */
+        .panel -borderless {
+            border: 0;
+            box-shadow: none;
+        }
+
+        /* 마우스 커서를 포인터로 */
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <!-- 상단 타이틀 카드 -->
+        <div class="card card-body bg-light">
+            <!-- (주의) classe는 class 오타라 스타일이 적용되지 않습니다 -->
+            <div classe="title">:: Todolist App</div>
+        </div>
+        <div class="card card-default card-borderless">
+
+            <div class="card-body">
+                <!-- 입력 영역 -->
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="input-group">
+                            <!-- 아직 v-model 연결 전: 단순 입력창 -->
+                            <input id="msg" type="text" class="form-control" name="msg" placeholder="할일을 여기에 입력!" />
+                            <!-- 아직 클릭 이벤트 연결 전: 단순 버튼 -->
+                            <span class="btn btn-primary input-group-addon">추가</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 목록 영역 (현재는 정적 예시) -->
+                <div class="row">
+                    <div class="col">
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-success">
+                                <span class="todo-done pointer">할일1 (완료)</span>
+                                <span class="float-end badge bg-secondary pointer">삭제</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="pointer">할일2</span>
+                                <span class="float-end badge bg-secondary pointer">삭제</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="pointer">할일2 </span>
+                                <span class="float-end badge bg-secondary pointer">삭제</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Vue 라이브러리 로드 -->
+        <script src="https://unpkg.com/vue"></script>
+        <script type="text/javascript">
+            // 초기 타임스탬프 (id 생성용)
+            var ts = new Date().getTime();
+            var vm = Vue.createApp( {
+                name: "App",
+                data () {
+                    return {
+                        // 입력창에 연결할 값(아직 템플릿에는 연결되지 않음)
+                        todo: "",
+                        // 할 일 목록 데이터
+                        todolist: [
+                            { id: ts, todo: "자전거 타기", completed: false },
+                            { id: ts + 1, todo: "딸과 공원 산책", completed: true },
+                            { id: ts + 2, todo: "일요일 애견 카페", completed: false },
+                            { id: ts + 3, todo: "Vue 원고 집필", completed: false },
+                        ],
+                    };
+                },
+                methods: {
+                    // 새로운 할 일 추가
+                    addTodo () {
+                        if ( this.todo.length >= 2 ) {
+                            this.todolist.push( { id: new Date().getTime(), todo: this.todo, completed: false } );
+                            this.todo = "";
+                        }
+                    },
+                    // 특정 id의 할 일을 목록에서 삭제
+                    deleteTodo ( id ) {
+                        let index = this.todolist.findIndex( ( item ) => id === item.id );
+                        this.todolist.splice( index, 1 );
+                    },
+                    // 완료 여부 토글
+                    toggleCompleted ( id ) {
+                        let index = this.todolist.findIndex( ( item ) => id === item.id );
+                        this.todolist[ index ].completed = !this.todolist[ index ].completed;
+                    },
+                },
+            } ).mount( "#app" );
+
+        </script>
+</body>
+
+</html>

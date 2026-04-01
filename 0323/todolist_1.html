@@ -1,0 +1,76 @@
+<!doctype html>
+<!--
+  todolist_1.html
+  Bootstrap 레이아웃과 기본 UI 틀만 구성한 단계입니다.
+  실제 Vue 로직과 목록 렌더링은 아직 들어가지 않았습니다.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>06-11</title>
+    <!-- Bootstrap CSS를 CDN으로 불러오기 -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <style>
+      /* 기본 페이지 여백 및 폰트 설정 */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      /* 타이틀 스타일 */
+      .title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 20pt;
+      }
+
+      /* 완료된 항목에 줄 긋기 */
+      .todo-done {
+        text-decoration: line-through;
+      }
+
+      /* 컨테이너 패딩 */
+      .container {
+        padding: 10px 10px 10px 10px;
+      }
+
+      /*
+        borderless 패널용 스타일을 의도한 것으로 보입니다.
+        (주의) 클래스 이름에 공백이 있어 실제로는 적용되지 않습니다.
+      */
+      .panel -borderless {
+        border: 0;
+        box-shadow: none;
+      }
+
+      /* 마우스를 올리면 포인터가 보이도록 */
+      .pointer {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" class="container">
+      <!-- 상단 제목 카드 -->
+      <div class="card card-body bg-light">
+        <!-- (주의) classe는 class의 오타라 스타일이 적용되지 않습니다 -->
+        <div classe="title">:: Todolist App</div>
+      </div>
+      <!-- 본문 카드 (내용은 이후 단계에서 채움) -->
+      <div class="card card-default card-borderless">
+        <div class="card-body">
+          <!-- 추가 예정 -->
+        </div>
+      </div>
+    </div>
+    <!-- Vue 라이브러리 로드 -->
+    <script src="https://unpkg.com/vue"></script>
+    <!-- Vue 로직이 들어갈 자리 -->
+    <script type="text/javascript"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () { // window: 브라우저 전역 객체, onload: 페이지 로드 완료 시 호출되는 이벤트 핸들러
+        // 화면에 시계를 찍을 요소(h1#clock)를 가져온다.
+        let clock = document.getElementById('clock'); // let: 블록 스코프 변수 선언
+        // 1초(1000ms)마다 콜백을 반복 실행해 시계를 갱신.
+        setInterval(() => { // setInterval: 일정 주기로 함수를 반복 실행하는 전역 타이머
+          // 현재 시각 객체
+          let now = new Date(); // new Date(): 내장 Date 생성자 호출로 현재 시각 인스턴스 생성
+          // 문자열로 바꿔 h1 내용에 넣기
+          clock.innerHTML = now.toString(); // toString(): Date 객체를 문자열로 변환하는 내장 메서드
+        }, 1000); // 1000ms = 1초마다 실행
+      };
+    </script>
+  </head>
+  <body>
+    <h1 id="clock"></h1>
+  </body>
+</html>

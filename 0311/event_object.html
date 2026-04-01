@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      window.onload = function (event) {
+        // onload 핸들러는 브라우저가 자동으로 이벤트 객체를 첫 번째 인자로 넘겨준다.
+        // function()으로 적어도 인자가 전달되지만 받지 않을 뿐이며,
+        // function(event)처럼 매개변수를 선언하면 그 객체를 이름 그대로 쓸 수 있다.
+        alert(event); // [object Event] 형태로 표시됨
+        console.log(event); // 콘솔에서 load 이벤트 상세 확인
+      };
+      // 주의: 매개변수를 생략한 function()에서 event를 쓰면 브라우저마다 동작이 다를 수 있다.
+      // (일부는 전역 window.event를 제공, 일부는 undefined). 일관성을 위해 매개변수를 선언해 쓰는 편이 안전.
+    </script>
+  </head>
+  <body></body>
+</html>

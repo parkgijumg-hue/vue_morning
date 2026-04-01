@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Console Log (traditional handler)</title>
+    <script>
+      // 모든 리소스 로드 후 실행
+      window.onload = function () {
+        // 요소 참조만 저장하고, 값(.value)은 이벤트 시점에 읽는다.
+        var nameInput = document.getElementById('name');
+        var btn = document.getElementById('btn');
+        if (!nameInput || !btn) return; // 요소가 없으면 종료
+
+        // 고전적 방식: onclick 프로퍼티에 함수 대입
+        // 실무 폼 처리에선 addEventListener와 submit 이벤트, preventDefault를 쓰는 편이 더 일반적.
+        btn.onclick = function () {
+          // 클릭 순간의 현재 입력값을 콘솔에 출력
+          console.log(nameInput.value);
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <form>
+      <label for="name">이름:</label>
+      <input type="text" id="name" name="name" size="30" />
+      <input type="button" id="btn" value="전송" />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traditional Event Property</title>
+    <script>
+      // 페이지가 모두 로드된 후 실행
+      window.onload = function () {
+        // id로 버튼을 찾는다
+        let button = document.getElementById('button');
+        // 전통적 방식: onclick 프로퍼티에 함수를 대입
+        button.onclick = function () {
+          alert('click');
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <button id="button">버튼</button>
+  </body>
+</html>

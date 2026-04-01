@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>로그인 화면</h1>
+    <form>
+      검색어 : <input type="text" name="search" />
+      <button>검색</button>
+      <hr />
+    </form>
+    <!-- post로 반드시 보내야 하는 경우
+     1) 보안에 민감한 데이터
+     2) 너무 큰 데이터
+     3) 파일첨부 
+     -->
+
+    <!-- form 태그안에 method를 지정하지 않으면 자동으로 get 방식 -->
+    <!-- get방식: 브라우저가 http를 만들때 body에 안넣고, 주소와 함께 head에 넣어서 노출됨. -->
+    <!-- id,pw 등 주소에 노출되면 안되는 부분 -> Post방식 사용 / 브라우저의 주소부분은 사용하는 사람이 다 볼 수 있음 -->
+    <!-- 보안에 민감한 데이터는 http의 header로 전달되면 노출되므로 안됨 -->
+    <!-- http로 만들어서 전달할 때  노출되지 않도록 body에 넣어ㅓ 서버로 전달 -->
+    <!-- post방식: form태그안에 method="post" 라고  지정해야함. -->
+
+    <!-- http 요청 -->
+    <!-- 
+     요청줄: method, 주소 +get인 경우 데이터,http버전'
+     header: 클라이언트 정보(브라우저,os,ip,port 등), 요청 데이터 타입(html 등)
+     엔터(빈 줄)
+     body: post인 경우 데이터 
+     -->
+
+    <!-- http 응답 -->
+    <!-- 
+     응답줄(상태줄): http버전(1.1), 상태값(200,404,500 등),  상태값에 대한 텍스트
+     header: 응답 데이터  정보(크기,타입 등), 서버 정보
+     엔터(빈줄)
+     body: 응답 데이터(html,css,js,img 등)
+       -->
+    <form method="post">
+      아이디 : <input type="text" name="userId" /><br />
+      비밀번호 : <input type="text" name="pw" /><br />
+      <button>로그인</button>
+    </form>
+  </body>
+</html>

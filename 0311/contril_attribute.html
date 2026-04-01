@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        // id='image' 요소 객체를 가져온다.
+        let image = document.getElementById('image');
+        // 이미지 주소를 설정하면 브라우저가 해당 그림을 로드해 표시한다.
+        image.src =
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzAyMDJfMjMw%2FMDAxNDg2MDE4NjcyNTE4.UwjrKXp8nxAIU0gx0ZJMMP53ZKrM6osMSRnhHcKNBakg.zmK98bH4n88KAF6GXViYL8lnL5Uz87jv3SKKjqIdKLsg.JPEG.clasic820%2FCYMERA_20170126_214702.jpg&type=sc960_832';
+        // width/height 속성: 표시 크기를 지정. windth 오타를 width로 수정.
+        image.width = 300;
+        image.height = 200;
+      };
+    </script>
+  </head>
+  <body>
+    <img id="image" />
+  </body>
+</html>

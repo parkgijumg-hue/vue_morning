@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        // body 태그에 사용자 정의(data-) 속성 추가: data-custom="value"
+        document.body.setAttribute('data-custom', 'value');
+        // 위에서 넣은 속성 값을 다시 읽어옴
+        let dataCustom = document.body.getAttribute('data-custom');
+        // 읽어온 값을 알림창으로 표시 => "value"가 뜬다.
+        alert(dataCustom);
+      };
+    </script>
+  </head>
+  <body></body>
+</html>
